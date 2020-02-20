@@ -9,7 +9,9 @@ app.use(cors())
 
 io.on('connection', (socket) => {
     socket.on('fetchRooms', () => {
-        Room.findAll()
+        Room.findAll({
+            attributes: ['id', 'name', 'player']
+        })
             .then(rooms => {
                 socket.emit('showRooms', rooms)
             })
