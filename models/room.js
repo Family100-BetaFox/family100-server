@@ -3,8 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const Model = sequelize.Sequelize.Model
 
   class Room extends Model {
-    static associate () {
-
+    static associate (models) {
+      Room.hasMany(models.Player, { foreignKey: 'id'} )
     }
   }
 
