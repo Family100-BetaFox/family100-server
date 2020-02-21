@@ -18,6 +18,7 @@ io.on('connection', (socket) => {
         })
         .catch(err => {
             socket.emit('showError', err)
+            console.log(err)
         })
     })
 
