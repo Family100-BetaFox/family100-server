@@ -8,47 +8,54 @@ const cors = require('cors')
 app.use(cors())
 
 io.on('connection', (socket) => {
-    socket.on('fetchRooms', () => {
-        Room.findAll({
-            attributes: ['id', 'name', 'player']
-        })
-            .then(rooms => {
-                socket.emit('showRooms', rooms)
-            })
-            .catch(err => {
-                socket.emit('showError', err)
-            })
-    })
+    // socket.on('fetchRooms', () => {
+    //     Room.findAll({
+    //         attributes: ['id', 'name', 'player']
+    //     })
+    //         .then(rooms => {
+    //             socket.emit('showRooms', rooms)
+    //         })
+    //         .catch(err => {
+    //             socket.emit('showError', err)
+    //         })
+    // })
 
-    socket.on('fetchLogicTopic', () => {
-        LogicTopic.findAll()
-            .then(questions => {
-                socket.emit('showLogicTopic', questions)
-            })
-            .catch(err => {
-                socket.emit('showError', err)
-            })
-    })
+    // socket.on('joinRoom', (roomId) => {
+    //     socket.join(roomId, () => {
+    //         io.to(roomId).emit('someoneJoined', roomId)
+    //     })
+    // })
 
-    socket.on('fetchGeneralTopic', () => {
-        GeneralTopic.findAll()
-            .then(questions => {
-                socket.emit('showGeneralTopic', questions)
-            })
-            .catch(err => {
-                socket.emit('showError', err)
-            })
-    })
+    // socket.on('fetchLogicTopic', () => {
+    //     LogicTopic.findAll()
+    //         .then(questions => {
+    //             socket.emit('showLogicTopic', questions)
+    //         })
+    //         .catch(err => {
+    //             socket.emit('showError', err)
+    //         })
+    // })
 
-    socket.on('fetchRiddleTopic', () => {
+    socket.on('fetchQuestions', () => {
+        console.log('asodhasdhasdhasdhaida')
         RiddleTopic.findAll()
             .then(questions => {
-                socket.emit('showRiddleTopic', questions)
+                socket.emit('showQuestions', questions)
             })
             .catch(err => {
                 socket.emit('showError', err)
             })
     })
+
+    // socket.on('fetchRiddleTopic', () => {
+    //     RiddleTopic.findAll()
+    //         .then(questions => {
+    //             socket.emit('showRiddleTopic', questions)
+    //         })
+    //         .catch(err => {
+    //             socket.emit('showError', err)
+    //         })
+    // })
 })
 
 http.listen(3000, () => {
